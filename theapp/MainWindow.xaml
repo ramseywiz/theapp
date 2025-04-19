@@ -4,16 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:theapp"
-        xmlns:userControls="clr-namespace:theapp.View.UserControls"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
-            <RowDefinition/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-
-        <userControls:MenuBar />
+        <ListView Grid.Row="0" ItemsSource="{Binding allTodos}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox IsChecked="{Binding done}" Content="{Binding desc}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBox x:Name="NewTodoTextBox" Width="150" Margin="10"/>
+            <Button Content="Add Task" Click="AddTodoButton_clicked" Margin="10"/>
+        </StackPanel>
     </Grid>
 </Window>
